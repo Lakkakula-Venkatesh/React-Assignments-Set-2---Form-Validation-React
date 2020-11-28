@@ -65,20 +65,21 @@ const App = () => {
   }
   return (
     <>
-      <div id="main"></div>
-      <input data-testid = 'name' onChange={handleNameChange} required value={name}/>
-      <input data-testid = 'email' onChange={handleMailChange} required value={mail} />
-      <input data-testid = 'gender' onChange={handleGenderChange} required value={gender} />
-      <input data-testid = 'phoneNumber' onChange={handleNumberChange} value={number} />
-      <input data-testid = 'password' type='password' onChange={handlePasswordChange} value={password} />
-      <input data-testid = 'submit' type="submit" onClick={handleSubmit} />
-      {greetMessage !== "" && <div>{greetMessage}</div>}
-      {allError !== "" && <div>{allError}</div>}
-      {nameError !== "" && <div>{nameError}</div>}
-      {mailError !== "" && <div>{mailError}</div>}
-      {genderError !== "" && <div>{genderError}</div>}
-      {numberError !== "" && <div>{numberError}</div>}
-      {passwordError !== "" && <div>{passwordError}</div>}
+      <div id="main">
+        <input data-testid = 'name' onChange={handleNameChange} required value={name}/>
+        <input data-testid = 'email' onChange={handleMailChange} required value={mail} />
+        <input data-testid = 'gender' onChange={handleGenderChange} required value={gender} />
+        <input data-testid = 'phoneNumber' onChange={handleNumberChange} value={number} />
+        <input data-testid = 'password' type='password' onChange={handlePasswordChange} value={password} />
+        <input data-testid = 'submit' type="submit" onClick={handleSubmit} />
+        {greetMessage !== "" && <div>{greetMessage}</div>}
+        {allError !== "" && <div>{allError}</div>}
+        {nameError !== "" && <div>{nameError}</div>}
+        {mailError !== "" && <div>{mailError}</div>}
+        {genderError !== "" && <div>{genderError}</div>}
+        {numberError !== "" && <div>{numberError}</div>}
+        {passwordError !== "" && <div>{passwordError}</div>}
+      </div>
     </>
   );
 }
