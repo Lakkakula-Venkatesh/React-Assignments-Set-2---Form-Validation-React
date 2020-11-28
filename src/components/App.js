@@ -17,6 +17,7 @@ const App = () => {
 
   const handleSubmit = () => {
     if(name === "" || mail === "" || gender === "" || number === "" || password === "") {
+      setGreetMessage("");
       setAllError("All fields are mandatory");
       return;
     }
