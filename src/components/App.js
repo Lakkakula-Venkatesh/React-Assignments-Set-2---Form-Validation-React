@@ -14,7 +14,7 @@ const App = () => {
       setMessage("All fields are mandatory");
       return;
     }
-    if(!(/[a-z][0-9]/i.test(name))) {
+    if(!(/[a-z ][0-9]/i.test(name))) {
       setMessage("Name is not alphanumeric");
       return;
     }
@@ -22,7 +22,7 @@ const App = () => {
       setMessage("Email must contain @");
       return;
     }
-    if(isNaN(number)) {
+    if(isNaN(number) || number.includes(".")) {
       setMessage("Phone Number must contain only numbers");
       return;
     }
@@ -57,11 +57,11 @@ const App = () => {
   return (
     <>
       <div id="main">
-        <input data-testid = 'name' onChange={handleNameChange} required value={name}/><br />
-        <input data-testid = 'email' onChange={handleMailChange} required value={mail} /><br />
-        <input data-testid = 'gender' onChange={handleGenderChange} required value={gender} /><br />
-        <input data-testid = 'phoneNumber' onChange={handleNumberChange} value={number} /><br />
-        <input data-testid = 'password' type='password' onChange={handlePasswordChange} value={password} /><br />
+        <input data-testid = 'name' onChange={(event) => setName(event.target.value)} required value={name}/><br />
+        <input data-testid = 'email' onChange={(event) => setMail(event.target.value)} required value={mail} /><br />
+        <input data-testid = 'gender' onChange={(event) => setGender(event.target.value)} required value={gender} /><br />
+        <input data-testid = 'phoneNumber' onChange={(event) => setNumber(event.target.value)} value={number} /><br />
+        <input data-testid = 'password' type='password' onChange={(event) => setPassword(event.target.value)} value={password} /><br />
         <input data-testid = 'submit' type="submit" onClick={handleSubmit} />
         {message !== "" && <div>{message}</div>}
       </div>
