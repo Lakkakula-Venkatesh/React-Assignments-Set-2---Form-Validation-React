@@ -61,7 +61,7 @@ const App = () => {
       <div id="main">
         <input data-testid = 'name' onChange={(event) => setName(event.target.value)} required value={name}/><br />
         <input data-testid = 'email' onChange={(event) => setMail(event.target.value)} required value={mail} /><br />
-        <input value="male" data-testid = 'gender' onChange={(event) => setGender(event.target.value)} required value={gender} /><br />
+        <input value="male" data-testid = 'gender' onChange={(event) => setGender(event.target.value)} /><br />
         <input data-testid = 'phoneNumber' onChange={(event) => setNumber(event.target.value)} value={number} /><br />
         <input data-testid = 'password' type='password' onChange={(event) => setPassword(event.target.value)} value={password} /><br />
         <input data-testid = 'submit' type="submit" onClick={handleSubmit} />
