@@ -2,15 +2,15 @@ import React, {Component, useState} from "react";
 import '../styles/App.css';
 
 const App = () => {
-  const [name, setName] = React.useState("");
-  const [mail, setMail] = React.useState("");
-  const [gender, setGender] = React.useState("male");
-  const [number, setNumber] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [name, setName] = useState("");
+  const [mail, setMail] = useState("");
+  const [gender, setGender] = useState("male");
+  const [number, setNumber] = useState("");
+  const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   
   const handleSubmit = () => {
-    if(name === "" || mail === "" || gender === "" || number === "" || password === "") {
+    if(!name.trim() || !mail.trim() || !gender.trim() || !number.trim() || !password.trim()) {
       setMessage("All fields are mandatory");
       return;
     }
@@ -26,14 +26,14 @@ const App = () => {
       setMessage("Phone Number must contain only numbers");
       return;
     }
-    if(gender.toLowerCase() !== "male" && gender.toLowerCase() !== "female" && gender.toLowerCase() !== "others") {
-      setMessage("Please identify as male, female or others");
-      return;
-    }    
     if(password.length < 6) {
       setMessage("Password must contain atleast 6 letters");
       return;
     }
+    if(gender.toLowerCase() !== "male" && gender.toLowerCase() !== "female" && gender.toLowerCase() !== "others") {
+      setMessage("Please identify as male, female or others");
+      return;
+    }    
     setMessage(getName());
   }
   const getName = () => {
@@ -63,7 +63,7 @@ const App = () => {
         <input data-testid = 'phoneNumber' onChange={handleNumberChange} value={number} /><br />
         <input data-testid = 'password' type='password' onChange={handlePasswordChange} value={password} /><br />
         <input data-testid = 'submit' type="submit" onClick={handleSubmit} />
-        <div>{message}</div>
+        {message !== "" && <div>{message}</div>}
       </div>
     </>
   );
