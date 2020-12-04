@@ -34,12 +34,13 @@ const App = () => {
         break;
       }
     }
-    if (!alphabetCount || !numericCount) {
-      setMessage("Name is not alphanumeric");
-      return;
-    }
     if (mailCopy.includes("@")=== false) {
       setMessage("Email must contain @");
+      return;
+    }
+    
+    if (!alphabetCount || !numericCount) {
+      setMessage("Name is not alphanumeric");
       return;
     }
 
