@@ -1,109 +1,79 @@
 import React, { useEffect, useState } from "react";
 
 const App = () => {
-  let error = false;
-  let [ErrorMessage, setErrorMessage] = useState("");
-  const [input, setinput] = useState([
+  const [message, setMessage] = useState("");
+  const [input, setInput] = useState([
     {
       name: "",
       email: "",
       gender: "male",
-      phone: "",
+      number: "",
       password: ""
     }
   ]);
-  const handleclick = () => {
+  const handleSubmit = () => {
     let main = input[0];
-    console.log(main);
-    let temp = main["name"];
-    let address = main["email"];
-    let password = main["password"];
-    let gender = main["gender"];
-    let phone = main["phone"];
-    if (
-      temp === "" ||
-      address === "" ||
-      password === "" ||
-      gender === "" ||
-      phone === ""
-    ) {
-      setErrorMessage("All fields are mandatory");
+    let nameCopy = main["name"].toLowerCase().trim();
+    let mailCopy = main["email"].toLowerCase().trim();
+    let passwordCopy = main["password"];
+    let genderCopy = main["gender"];
+    let numberCopy = main["number"];
+    if (nameCopy === "" || mailCopy === "" || passwordCopy === "" || genderCopy === "" || numberCopy === "") {
+      setMessage("All fields are mandatory");
       return;
     }
-    let cnt1 = 0;
-    let cnt2 = 0;
-    for (let i = 0; i < temp.length; i++) {
-      if (
-        (temp[i] >= "a" && temp[i] <= "z") ||
-        (temp[i] >= "A" && temp[i] <= "Z")
-      ) {
-        cnt1++;
-      } else if (Number(temp[i]) >= 0 && Number(temp[i]) <= 9) {
-        cnt2++;
+    let alphabetCount = 0;
+    let numericCount = 0;
+    for (let i = 0; i < nameCopy.length; i++) {
+      if (nameCopy[i] >= "a" && nameCopy[i] <= "z") {
+        ++alphabetCount;
+      } else if (nameCopy[i] >= 0 && nameCopy[i] <= 9) {
+        ++numericCount;
       }
-      if (cnt1 && cnt2) {
+      if (alphabetCount && numericCount) {
         break;
       }
     }
-
-    if (address.includes("@")=== false) {
-      setErrorMessage("Email must contain @");
+    if (!alphabetCount || !numericCount) {
+      setMessage("Name is not alphanumeric");
+      return;
+    }
+    if (mailCopy.includes("@")=== false) {
+      setMessage("Email must contain @");
       return;
     }
 
-    if (!cnt1 || !cnt2) {
-      setErrorMessage("Name is not alphanumeric");
-      return;
-    } 
-
-    if (isNaN(main["phone"])) {
-      setErrorMessage("Phone Number must contain only numbers");
+    if (isNaN(numberCopy)) {
+      setMessage("Phone Number must contain only numbers");
       return;
     }
-    if (main["password"].length < 6) {
-      setErrorMessage("Password must contain atleast 6 letters");
+    if (passwordCopy.length < 6) {
+      setMessage("Password must contain atleast 6 letters");
       return;
     }
-    let info = main["email"];
-    info = info.substr(0, info.indexOf("@"));
-    console.log(info);
-    setErrorMessage("Hello " + info);
+    setMessage("Hello " + mailCopy.substr(0, mailCopy.indexOf("@")));
   };
-  const handlechange = (e) => {
+  const handleChange = (e) => {
     let dup = input;
     dup = dup[0];
     dup[e.target.name] = e.target.value;
-    setinput([dup]);
+    setInput([dup]);
   };
   return (
     <div id="main">
-      <div>{ErrorMessage}</div>
+      {message !== "" && <div>{message}</div>}
       <label>Name:</label>
-      <input data-testid="name" name="name" onChange={handlechange} />
-      <br />
+      <input data-testid="name" name="name" onChange={handleChange} /><br />
       <label>Email address:</label>
-      <input data-testid="email" name="email" onChange={handlechange} />
-      <br />
+      <input data-testid="email" name="email" onChange={handleChange} /><br />
       <label>Gender:</label>
-      <input
-        value="male"
-        data-testid="gender"
-        name="gender"
-        onChange={handlechange}
-      />
-      <br />
+      <input value="male" data-testid="gender" name="gender" onChange={handleChange}/><br />
       <label>Phone number:</label>
-      <input data-testid="phoneNumber" name="phone" onChange={handlechange} />
+      <input data-testid="phoneNumber" name="number" onChange={handleChange} />
       <br />
       <label>Password:</label>
-      <input
-        data-testid="password"
-        type="password"
-        name="password"
-        onChange={handlechange}
-      />
-      <br />
-      <button data-testid="submit" onClick={handleclick}>
+      <input data-testid="password" type="password" name="password" onChange={handleChange}/><br />
+      <button data-testid="submit" onClick={handleSubmit}>
         Submit
       </button>
     </div>
